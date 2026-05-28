@@ -101,7 +101,7 @@ function App() {
         </div>
       </section>
 
-      {/* Editorial Spread */}
+      {/* Detail/Editorial Spread */}
       <section className="spread detail-spread" id="editorial">
         <div className="detail__visual">
           <img 
@@ -114,7 +114,7 @@ function App() {
           <p className="kicker reveal">Heritage</p>
           <h2 className="reveal">Beyond the<br/>Ordinary.</h2>
           <p className="reveal">
-            '케뎀'은 단순히 과거가 아닌, 이미 우리 앞에 와 있는 미래를 뜻합니다. 
+            '케뎀'은 히브리어로 '앞에 있는 것'을 의미하며, 이미 우리 앞에 와 있는 미래를 뜻합니다. 
             KIDEM이 선별한 소품들은 당신의 공간에 새로운 에너지를 불어넣고, 
             가장 개인적인 장소에서 가장 풍요로운 감각을 깨울 것입니다. 
             진정한 럭셔리는 화려함이 아닌, 사물과 공간이 이루는 완벽한 조화에 있습니다.
@@ -126,12 +126,12 @@ function App() {
       <footer className="footer" id="contact">
         <div className="logo reveal">KIDEM</div>
         <div className="footer-nav reveal">
+          <a href="mailto:jjongsu2005@naver.com">jjongsu2005@naver.com</a>
           <a href="#">Instagram</a>
           <a href="#">Pinterest</a>
           <a href="#">Stockists</a>
-          <a href="#">Shop Now</a>
         </div>
-        <p className="copyright reveal">© 2025 KIDEM. All rights reserved.</p>
+        <p className="copyright reveal">© 2026 KIDEM. All rights reserved.</p>
       </footer>
     </main>
   )
