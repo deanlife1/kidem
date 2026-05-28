@@ -42,17 +42,15 @@ function App() {
       <section className="spread hero-spread" id="top">
         <div className="hero-spread__copy">
           <div className="cover-info reveal">
-            <span>Issue No. 01</span>
-            <span>Est. Spain — Editorial Lifestyle</span>
-            <span>2026 Edition</span>
+            <span>Volume 01</span>
           </div>
           
           <div className="hero-center">
             <div className="hero-title reveal">
-              <h1 className="logo-hero">KIDEM</h1>
+              <h1 className="logo-hero">IT'S ABOUT TO HAPPEN</h1>
               <div className="hero-meta">
                 <span className="line"></span>
-                <p className="kicker">The Art of Spatial Curation</p>
+                <p className="kicker">발견하는 순간 느껴지는 즐거움</p>
                 <span className="line"></span>
               </div>
             </div>
@@ -73,7 +71,7 @@ function App() {
       {/* Philosophy Spread */}
       <section className="spread philosophy" id="philosophy">
         <div className="spread__content">
-          <p className="kicker reveal">Philosophy</p>
+          <p className="kicker reveal">The Vision</p>
           <h2 className="reveal">공간의 여백,<br/>그 안에 스며든 시간의 조각들.</h2>
           <p className="lead reveal">
             KIDEM은 단순히 물건을 선별하는 것에 그치지 않습니다.<br/>
@@ -98,7 +96,7 @@ function App() {
       <section className="spread collection" id="collection">
         <div className="spread__content">
           <div className="section-head reveal">
-            <span className="kicker">The Curation</span>
+            <span className="kicker">The Objects</span>
             <h2>Essentials for<br/>Quiet Living.</h2>
           </div>
           <div className="collection-grid">
@@ -138,7 +136,7 @@ function App() {
           />
         </div>
         <div className="detail__content">
-          <p className="kicker reveal">The Narrative</p>
+          <p className="kicker reveal">The Heritage</p>
           <h2 className="reveal">KIDEM :<br/>To Begin.</h2>
           <div className="narrative-body reveal">
             <p className="hebrew-meaning">

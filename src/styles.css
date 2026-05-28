@@ -1,3 +1,5 @@
+@import url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css');
+
 :root {
   --bg: #fbfaf8;
   --txt: #222;
@@ -19,7 +21,7 @@ html {
 }
 
 body {
-  font-family: "Manrope", system-ui, sans-serif;
+  font-family: 'Manrope', 'Pretendard', system-ui, sans-serif;
   color: var(--txt);
   overflow-x: hidden;
   line-height: 1.7;
@@ -32,7 +34,15 @@ a {
   color: inherit;
 }
 
-/* Magazine Header - Ultra Minimal */
+/* --- General Typography --- */
+h2 {
+  font-family: "Cormorant Garamond", 'Pretendard', serif;
+  font-weight: 300;
+  line-height: 1.2;
+  letter-spacing: -0.01em;
+}
+
+/* Magazine Header */
 .nav {
   position: fixed;
   top: 0;
@@ -44,11 +54,6 @@ a {
   align-items: center;
   padding: 50px 20px;
   transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
-  pointer-events: none;
-}
-
-.nav * {
-  pointer-events: auto;
 }
 
 .nav.scrolled {
@@ -60,7 +65,7 @@ a {
 
 .logo {
   font-family: "Cormorant Garamond", serif;
-  font-size: 3rem;
+  font-size: clamp(1.5rem, 5vw, 2.5rem);
   letter-spacing: 0.18em;
   font-weight: 300;
   margin-bottom: 24px;
@@ -71,10 +76,10 @@ a {
 
 .nav nav {
   display: flex;
-  gap: 48px;
+  gap: clamp(1.5rem, 5vw, 3rem);
   text-transform: uppercase;
-  letter-spacing: 0.3em;
-  font-size: 0.6rem;
+  letter-spacing: clamp(0.1em, 2vw, 0.3em);
+  font-size: clamp(0.5rem, 2vw, 0.6rem);
   font-weight: 700;
   color: var(--muted);
 }
@@ -96,7 +101,7 @@ a {
   flex-direction: column;
   position: relative;
   overflow: hidden;
-  padding: 160px 80px;
+  padding: clamp(4rem, 15vh, 10rem) clamp(1.5rem, 8vw, 5rem);
 }
 
 .spread__content {
@@ -106,13 +111,12 @@ a {
   z-index: 2;
 }
 
-/* Hero Spread - Cinematic Magazine Cover */
+/* Hero Spread */
 .hero-spread {
   padding: 0;
   justify-content: center;
   align-items: center;
   background: var(--bg);
-  position: relative;
 }
 
 .hero-spread__copy {
@@ -122,7 +126,7 @@ a {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  padding: 80px;
+  padding: clamp(2rem, 10vh, 5rem) clamp(1.5rem, 8vw, 5rem);
   pointer-events: none;
 }
 
@@ -140,7 +144,7 @@ a {
 
 .logo-hero {
   font-family: "Cormorant Garamond", serif;
-  font-size: clamp(4rem, 18vw, 12rem);
+  font-size: clamp(3rem, 14vw, 10rem);
   font-weight: 300;
   letter-spacing: 0.25em;
   line-height: 1;
@@ -163,12 +167,25 @@ a {
 }
 
 .hero-meta .kicker {
-  font-size: 0.8rem;
-  letter-spacing: 0.6em;
+  font-size: clamp(0.6rem, 2vw, 0.8rem);
+  letter-spacing: clamp(0.2em, 2vw, 0.6em);
   text-transform: uppercase;
   color: var(--muted);
   font-weight: 700;
   margin-bottom: 0;
+  opacity: 0;
+  animation: fade-up 1.2s cubic-bezier(0.16, 1, 0.3, 1) 0.5s forwards;
+}
+
+@keyframes fade-up {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
 
 .hero-bottom {
@@ -219,7 +236,7 @@ a {
   100% { transform: scaleY(0); transform-origin: bottom; opacity: 0; }
 }
 
-/* Philosophy Spread - Pure Minimalism */
+/* Philosophy Spread */
 .philosophy {
   background: #fff;
   text-align: center;
@@ -228,17 +245,14 @@ a {
 
 .philosophy h2 {
   font-family: "Cormorant Garamond", serif;
-  font-size: clamp(2.4rem, 6vw, 5rem);
-  font-weight: 300;
+  font-size: clamp(2.4rem, 6vw, 4.5rem);
   margin-bottom: 80px;
-  line-height: 1.3;
-  letter-spacing: -0.01em;
   color: var(--accent);
   word-break: keep-all;
 }
 
 .philosophy .lead {
-  font-size: 1.15rem;
+  font-size: clamp(0.95rem, 2.5vw, 1.15rem);
   max-width: 720px;
   margin: 0 auto 120px;
   color: var(--muted);
@@ -256,17 +270,7 @@ a {
   margin-right: auto;
 }
 
-.philosophy .quote {
-  margin-top: 140px;
-  font-family: "Cormorant Garamond", serif;
-  font-size: 3.5rem;
-  font-style: italic;
-  color: var(--accent);
-  opacity: 0.9;
-  line-height: 1.2;
-}
-
-/* Grid Spread (Collection) - Editorial Grid */
+/* Collection Spread */
 .collection {
   background: var(--bg);
 }
@@ -276,34 +280,27 @@ a {
   text-align: left;
 }
 
+.collection .section-head h2 {
+    font-size: clamp(2.2rem, 5vw, 4rem);
+}
+
 .collection .kicker {
   display: inline-block;
   margin-bottom: 20px;
   border-bottom: 1px solid var(--accent);
   padding-bottom: 4px;
+  font-size: clamp(0.8rem, 2vw, 1rem);
 }
 
 .collection-grid {
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 120px 80px;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: clamp(2rem, 5vw, 5rem);
   align-items: start;
 }
 
 .item {
   grid-column: span 1;
-  position: relative;
-  margin-bottom: 0;
-}
-
-.item:nth-child(even) {
-  margin-top: 180px;
-}
-
-.item:nth-child(3) {
-  grid-column: span 1;
-  grid-column-start: auto;
-  margin-top: -100px;
 }
 
 .item__img {
@@ -313,14 +310,6 @@ a {
   overflow: hidden;
   margin-bottom: 32px;
   box-shadow: var(--shadow);
-}
-
-.item:nth-child(2) .item__img {
-  aspect-ratio: 1/1;
-}
-
-.item:nth-child(3) .item__img {
-  aspect-ratio: 3/4;
 }
 
 .item__img img {
@@ -335,8 +324,8 @@ a {
 }
 
 .item h3 {
-  font-family: "Cormorant Garamond", serif;
-  font-size: 2rem;
+  font-family: "Cormorant Garamond", 'Pretendard', serif;
+  font-size: clamp(1.5rem, 4vw, 2rem);
   font-weight: 400;
   margin-bottom: 12px;
   letter-spacing: -0.01em;
@@ -344,14 +333,14 @@ a {
 }
 
 .item p {
-  font-size: 0.7rem;
+  font-size: clamp(0.6rem, 1.5vw, 0.7rem);
   color: var(--muted);
   text-transform: uppercase;
   letter-spacing: 0.2em;
   font-weight: 700;
 }
 
-/* Detail Spread - Contrast & Focus */
+/* Detail Spread */
 .detail-spread {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -379,7 +368,38 @@ a {
 }
 
 .detail__content {
-  padding: 0 120px;
+    padding: clamp(2rem, 10vw, 8rem);
+}
+
+.detail__content h2 {
+  font-size: clamp(2.8rem, 8vw, 5rem);
+  margin-bottom: 48px;
+  color: #fff;
+}
+
+.detail__content p {
+  font-size: clamp(1rem, 2.5vw, 1.15rem);
+  line-height: 2;
+  color: #999;
+  max-width: 540px;
+  font-weight: 300;
+}
+
+.narrative-body {
+  margin-top: 40px;
+}
+
+.narrative-body p {
+  margin-bottom: 32px;
+  word-break: keep-all;
+}
+
+.hebrew-meaning {
+  font-family: "Cormorant Garamond", serif !important;
+  font-size: clamp(1.2rem, 3vw, 1.5rem) !important;
+  color: #fff !important;
+  font-style: italic;
+  margin-bottom: 48px !important;
 }
 
 /* Quote Animation */
@@ -389,11 +409,10 @@ a {
 }
 
 .quote-animated {
-  font-family: "Cormorant Garamond", serif;
-  font-size: clamp(2rem, 5vw, 4.5rem);
+  font-family: "Cormorant Garamond", 'Pretendard', serif;
+  font-size: clamp(2.2rem, 5vw, 4.5rem);
   font-style: italic;
   color: var(--accent);
-  opacity: 0.9;
   line-height: 1.2;
   display: inline-block;
   animation: float-3d 8s ease-in-out infinite;
@@ -408,69 +427,27 @@ a {
   75% { transform: translateZ(50px) rotateX(3deg) rotateY(-3deg); }
 }
 
-@media (max-width: 768px) {
-  .quote-animated { font-size: 2.2rem; }
-}
-
-.narrative-body {
-  margin-top: 40px;
-}
-
-.narrative-body p {
-  margin-bottom: 32px;
-  line-height: 2;
-  word-break: keep-all;
-}
-
-.hebrew-meaning {
-  font-family: "Cormorant Garamond", serif;
-  font-size: 1.5rem !important;
-  color: #fff !important;
-  font-style: italic;
-  line-height: 1.8;
-  margin-bottom: 48px !important;
-}
-
-.detail__content h2 {
-  font-family: "Cormorant Garamond", serif;
-  font-size: 5rem;
-  font-weight: 300;
-  margin-bottom: 48px;
-  line-height: 1;
-  letter-spacing: -0.02em;
-  color: #fff;
-}
-
-.detail__content p {
-  font-size: 1.15rem;
-  line-height: 2;
-  color: #999;
-  max-width: 540px;
-  font-weight: 300;
-}
-
-/* Footer - Grand Exit */
+/* Footer */
 .footer {
   background: #fff;
-  padding: 160px 80px;
+  padding: clamp(5rem, 15vh, 10rem) clamp(1.5rem, 8vw, 5rem);
   text-align: center;
   border-top: 1px solid var(--line);
 }
 
 .footer .logo {
-  font-size: 6rem;
+  font-size: clamp(2.5rem, 10vw, 5rem);
   margin-bottom: 60px;
-  letter-spacing: 0.2em;
 }
 
 .footer-nav {
   display: flex;
   justify-content: center;
-  gap: 80px;
+  gap: clamp(1.5rem, 6vw, 5rem);
   margin-bottom: 80px;
   text-transform: uppercase;
-  letter-spacing: 0.3em;
-  font-size: 0.65rem;
+  letter-spacing: clamp(0.1em, 2vw, 0.3em);
+  font-size: clamp(0.5rem, 2vw, 0.65rem);
   font-weight: 800;
   color: var(--muted);
 }
@@ -480,14 +457,14 @@ a {
 }
 
 .copyright {
-  font-size: 0.6rem;
+  font-size: clamp(0.5rem, 1.5vw, 0.6rem);
   color: #bbb;
   letter-spacing: 0.2em;
   text-transform: uppercase;
   font-weight: 700;
 }
 
-/* Reveal Animation */
+/* Reveal on Scroll */
 .reveal {
   opacity: 0;
   transform: translateY(50px);
@@ -499,53 +476,31 @@ a {
   transform: translateY(0);
 }
 
-@media (max-width: 1024px) {
-  .spread { padding: 120px 40px; }
-  .collection-grid { 
-    grid-template-columns: 1fr; 
-    gap: 80px;
-  }
-  .item { 
-    grid-column: span 1; 
-  }
-  .item:nth-child(even) { margin-top: 0; }
-  .item:nth-child(3) { margin-top: 0; }
-  .detail-spread { grid-template-columns: 1fr; }
-  .detail__visual { height: 40vh; }
-  .detail__content { padding: 80px 40px; }
-}
-
+/* --- Responsive Adjustments --- */
 @media (max-width: 768px) {
-  .nav { padding: 20px; flex-direction: row; justify-content: space-between; align-items: center; pointer-events: auto; }
+  .nav {
+    padding: 20px;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+  }
   .nav.scrolled { padding: 15px 20px; }
-  .logo { font-size: 1.2rem; margin-bottom: 0; letter-spacing: 0.1em; }
-  .nav nav { gap: 15px; font-size: 0.5rem; letter-spacing: 0.1em; }
+  .logo { margin-bottom: 0; }
   
-  .spread { padding: 100px 20px 60px; min-height: auto; }
-  
-  .hero-spread__copy { padding: 100px 20px 40px; height: 100vh; }
-  .logo-hero { font-size: 3.5rem; letter-spacing: 0.15em; margin-bottom: 20px; }
-  .hero-meta { gap: 15px; }
-  .hero-meta .line { width: 20px; }
-  .hero-meta .kicker { font-size: 0.55rem; letter-spacing: 0.2em; }
+  .hero-meta .line { width: 30px; }
   .vertical-text { display: none; }
   .scroll-hint { align-items: center; width: 100%; }
-  
-  .philosophy h2 { font-size: 2rem; margin-bottom: 40px; }
-  .philosophy .lead { font-size: 0.95rem; margin-bottom: 60px; padding: 0 10px; }
-  .philosophy .quote { font-size: 2rem; margin-top: 80px; }
-  
+
+  .philosophy h2 { margin-bottom: 40px; }
+  .philosophy .lead { margin-bottom: 60px; }
+  .quote-container { margin-top: 80px; }
+
   .collection .section-head { margin-bottom: 60px; }
-  .collection .section-head h2 { font-size: 2rem; }
-  .item h3 { font-size: 1.5rem; }
-  
-  .hebrew-text { font-size: 5rem; }
-  .detail__content { padding: 60px 20px; }
-  .detail__content h2 { font-size: 2.8rem; margin-bottom: 30px; }
-  .detail__content p { font-size: 1rem; }
-  .hebrew-meaning { font-size: 1.1rem !important; }
-  
-  .footer { padding: 80px 20px; }
-  .footer .logo { font-size: 2.5rem; margin-bottom: 40px; }
-  .footer-nav { gap: 20px; }
+
+  .detail-spread { grid-template-columns: 1fr; }
+  .detail__visual { height: 40vh; }
+  .detail__content { padding-top: 4rem; padding-bottom: 4rem; }
+
+  .footer .logo { margin-bottom: 40px; }
+  .footer-nav { margin-bottom: 60px; }
 }
