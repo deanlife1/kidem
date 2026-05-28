@@ -95,7 +95,7 @@ function App() {
       </section>
       <section className="ticker"><div className="ticker__track">vintage mood · quiet luxury · european design · tactile surfaces · curated living · vintage mood · quiet luxury · european design · tactile surfaces · curated living</div></section>
       <section className="section" id="story"><div className="section__head"><p className="kicker">brand story</p><h2>Kidem은 어떤 일이 일어나다는 뜻입니다</h2><p className="lead">좋은 일이 일어나는 순간을 공간과 오브제로 번역합니다. 설명보다 먼저 분위기가 느껴지도록, 색과 질감과 텍스트의 온도를 하나로 맞췄습니다.</p></div></section>
-      <section className="section" id="collection"><div className="section__head"><p className="kicker">collection</p><h2>빈티지하지만 멋스러운 선택</h2></div><div className="cards"><article className="card"><img src="/inflatable-16.jpg" alt="object" style={{ width: '100%', height: '160px', objectFit: 'cover', borderRadius: '16px', marginBottom: '16px' }} /><h3>object</h3><p>공간의 중심이 되는 조형 오브제.</p></article><article className="card"><h3>table</h3><p>테이블 위 리듬을 바꾸는 소품.</p></article><article className="card"><h3>living</h3><p>일상을 조용히 바꾸는 리빙 오브제.</p></article></div></section>
+      <section className="section" id="collection"><div className="section__head"><p className="kicker">collection</p><h2>빈티지하지만 멋스러운 선택</h2></div><div className="cards"><article className="card"><h3>object</h3><p>공간의 중심이 되는 조형 오브제.</p></article><article className="card"><h3>table</h3><p>테이블 위 리듬을 바꾸는 소품.</p></article><article className="card"><h3>living</h3><p>일상을 조용히 바꾸는 리빙 오브제.</p></article></div></section>
       <section className="section" id="cta"><div className="cta"><p className="kicker">buy now</p><h2>당신의 공간에 좋은 일이 일어나도록</h2><p>키뎀의 큐레이션은 당신의 다음 장면을 준비합니다.</p><a className="btn solid" href="#top">top</a></div></section>
     </main>
   )
