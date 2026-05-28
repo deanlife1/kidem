@@ -31,40 +31,66 @@ function App() {
       <header className={`nav ${scrolled ? 'scrolled' : ''}`}>
         <div className="logo" onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}>KIDEM</div>
         <nav>
-          <a href="#philosophy">Philosophy</a>
-          <a href="#collection">Collection</a>
-          <a href="#editorial">Journal</a>
-          <a href="#contact">Contact</a>
+          <a href="#philosophy">The Vision</a>
+          <a href="#collection">The Objects</a>
+          <a href="#heritage">The Heritage</a>
+          <a href="#contact">Inquiry</a>
         </nav>
       </header>
 
-      {/* Hero Spread */}
+      {/* Hero Spread - Premium Magazine Cover */}
       <section className="spread hero-spread" id="top">
-        <div className="spline-container">
-          <spline-viewer url="https://prod.spline.design/Pe2ow20vSg2vj7iU/scene.splinecode" />
-        </div>
         <div className="hero-spread__copy">
-          <p className="kicker reveal">Est. Spain — Editorial Lifestyle</p>
-          <p className="scroll-hint">Discover More</p>
+          <div className="cover-info reveal">
+            <span>Issue No. 01</span>
+            <span>Est. Spain — Editorial Lifestyle</span>
+            <span>2026 Edition</span>
+          </div>
+          
+          <div className="hero-center">
+            <div className="hero-title reveal">
+              <h1 className="logo-hero">KIDEM</h1>
+              <div className="hero-meta">
+                <span className="line"></span>
+                <p className="kicker">The Art of Spatial Curation</p>
+                <span className="line"></span>
+              </div>
+            </div>
+          </div>
+
+          <div className="hero-bottom reveal">
+            <div className="vertical-text">
+              Spatial Design & Curated Objects
+            </div>
+            <div className="scroll-hint">
+              <span className="scroll-text">Explore the Origin</span>
+              <span className="scroll-bar"></span>
+            </div>
+          </div>
         </div>
       </section>
 
       {/* Philosophy Spread */}
       <section className="spread philosophy" id="philosophy">
         <div className="spread__content">
-          <p className="kicker reveal">Our Ethos</p>
-          <h2 className="reveal">The Art of<br/>Spatial Rhythm.</h2>
+          <p className="kicker reveal">Philosophy</p>
+          <h2 className="reveal">공간의 여백,<br/>그 안에 스며든 시간의 조각들.</h2>
           <p className="lead reveal">
-            KIDEM은 고요함 속에서 피어나는 아름다움을 믿습니다. 
-            스페인의 여유로운 정서와 유럽의 정교한 미학이 만나는 지점에서, 
-            우리는 당신의 일상을 하나의 작품으로 만드는 오브제들을 제안합니다.
+            KIDEM은 단순히 물건을 선별하는 것에 그치지 않습니다.<br/>
+            우리는 스페인의 따뜻한 햇살과 유럽의 고요한 골목에서 발견한 미학적인 영감을,<br/>
+            당신의 일상에 스며들 수 있는 아름다운 조각들로 재구성합니다.<br/>
+            공간이 내는 고유한 리듬과 당신의 호흡이 만나는 지점을 탐구합니다.
           </p>
-          <img 
-            src="/KakaoTalk_20230110_215608685.jpg" 
-            alt="Philosophy Visual" 
-            className="reveal" 
-            style={{ width: '100%', maxWidth: '1000px', marginTop: '80px', height: 'auto', boxShadow: 'var(--shadow)' }} 
-          />
+          <div className="visual-container reveal">
+            <img 
+              src="/KakaoTalk_20230110_215608685.jpg" 
+              alt="Philosophy Visual" 
+              style={{ width: '100%', height: 'auto', boxShadow: 'var(--shadow)' }} 
+            />
+          </div>
+          <div className="quote-container reveal">
+            <p className="quote-animated">A good feeling fills the space.</p>
+          </div>
         </div>
       </section>
 
@@ -72,53 +98,61 @@ function App() {
       <section className="spread collection" id="collection">
         <div className="spread__content">
           <div className="section-head reveal">
-            <p className="kicker">The Collection</p>
-            <h2>Objects for<br/>Quiet Living.</h2>
+            <span className="kicker">The Curation</span>
+            <h2>Essentials for<br/>Quiet Living.</h2>
           </div>
           <div className="collection-grid">
             <article className="item reveal">
               <div className="item__img">
-                <img src="/KakaoTalk_20230110_224521382.jpg" alt="Collection Item 01" />
+                <img src="/KakaoTalk_20230110_224521382.jpg" alt="Ornate Light" />
               </div>
-              <h3>01. Sculptural Form</h3>
-              <p>Object / Inflatable Texture</p>
+              <h3>01. Ornate Light</h3>
+              <p>OBJECT / BAROQUE INTERIOR</p>
             </article>
             <article className="item reveal">
               <div className="item__img">
-                <img src="/KakaoTalk_20230112_005735945_07.jpg" alt="Collection Item 02" />
+                <img src="/KakaoTalk_20230112_005735945_07.jpg" alt="Colorwashed Street" />
               </div>
-              <h3>02. Mineral Vessel</h3>
-              <p>Tableware / Natural Stone</p>
+              <h3>02. Colorwashed Street</h3>
+              <p>ARCHITECTURE / URBAN PALETTE</p>
             </article>
             <article className="item reveal">
               <div className="item__img">
-                <img src="/KakaoTalk_20230112_005735945_04.jpg" alt="Collection Item 03" />
+                <img src="/KakaoTalk_20230112_005735945_04.jpg" alt="Refined Essence" />
               </div>
-              <h3>03. Editorial Glass</h3>
-              <p>Living / Hand-blown</p>
+              <h3>03. Refined Essence</h3>
+              <p>SPATIAL / TACTILE STUDY</p>
             </article>
           </div>
         </div>
       </section>
 
-      {/* Detail/Editorial Spread */}
-      <section className="spread detail-spread" id="editorial">
+      {/* Heritage Detail Spread */}
+      <section className="spread detail-spread" id="heritage">
         <div className="detail__visual">
+          <div className="visual-overlay"></div>
           <img 
             src="/KakaoTalk_20221223_190657427.jpg" 
             alt="Editorial Visual" 
-            style={{ width: '100%', height: '100%', objectFit: 'cover', opacity: '0.4' }} 
+            style={{ width: '100%', height: '100%', objectFit: 'cover' }} 
           />
         </div>
         <div className="detail__content">
-          <p className="kicker reveal">Heritage</p>
-          <h2 className="reveal">Beyond the<br/>Ordinary.</h2>
-          <p className="reveal">
-            '케뎀'은 히브리어로 '앞에 있는 것'을 의미하며, 이미 우리 앞에 와 있는 미래를 뜻합니다. 
-            KIDEM이 선별한 소품들은 당신의 공간에 새로운 에너지를 불어넣고, 
-            가장 개인적인 장소에서 가장 풍요로운 감각을 깨울 것입니다. 
-            진정한 럭셔리는 화려함이 아닌, 사물과 공간이 이루는 완벽한 조화에 있습니다.
-          </p>
+          <p className="kicker reveal">The Narrative</p>
+          <h2 className="reveal">KIDEM :<br/>To Begin.</h2>
+          <div className="narrative-body reveal">
+            <p className="hebrew-meaning">
+              동쪽과 근원의 의미를 담은 이름.
+            </p>
+            <p>
+              공간에 새로운 감각을 더하는<br/>
+              오브제를 선별합니다.
+            </p>
+            <p>
+              진정한 럭셔리는 화려함이 아닌,<br/>
+              사물과 공간이 이루는 완벽한 조화에 있습니다.
+            </p>
+          </div>
         </div>
       </section>
 
@@ -127,11 +161,9 @@ function App() {
         <div className="logo reveal">KIDEM</div>
         <div className="footer-nav reveal">
           <a href="mailto:jjongsu2005@naver.com">jjongsu2005@naver.com</a>
-          <a href="#">Instagram</a>
-          <a href="#">Pinterest</a>
-          <a href="#">Stockists</a>
+          <a href="https://www.instagram.com/kidem_studio/" target="_blank" rel="noopener noreferrer">Instagram</a>
         </div>
-        <p className="copyright reveal">© 2026 KIDEM. All rights reserved.</p>
+        <p className="copyright reveal">© 2026 KIDEM. Designed for the inspired home.</p>
       </footer>
     </main>
   )

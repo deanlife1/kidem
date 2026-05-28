@@ -106,57 +106,117 @@ a {
   z-index: 2;
 }
 
-/* Hero Spread - Cinematic */
+/* Hero Spread - Cinematic Magazine Cover */
 .hero-spread {
   padding: 0;
   justify-content: center;
   align-items: center;
-  background: #fff;
-}
-
-.spline-container {
-  position: absolute;
-  inset: 0;
-  z-index: 1;
-  background: #fff;
+  background: var(--bg);
+  position: relative;
 }
 
 .hero-spread__copy {
-  position: relative;
+  height: 100vh;
+  width: 100%;
   z-index: 2;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 80px;
+  pointer-events: none;
+}
+
+.hero-center {
+  flex-grow: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.hero-title {
   text-align: center;
-  color: var(--txt);
+  width: 100%;
 }
 
-.hero-spread__copy .kicker {
-  font-size: 0.75rem;
-  letter-spacing: 0.4em;
-  text-transform: uppercase;
-  margin-bottom: 32px;
-  color: var(--muted);
-  font-weight: 600;
-}
-
-.hero-spread h1 {
+.logo-hero {
   font-family: "Cormorant Garamond", serif;
-  font-size: clamp(4rem, 14vw, 11rem);
+  font-size: clamp(4rem, 18vw, 12rem);
   font-weight: 300;
-  font-style: italic;
-  line-height: 0.95;
-  margin-bottom: 60px;
-  letter-spacing: -0.03em;
+  letter-spacing: 0.25em;
+  line-height: 1;
+  color: var(--accent);
+  margin-bottom: 40px;
 }
 
-.hero-spread .scroll-hint {
-  position: absolute;
-  bottom: 50px;
-  left: 50%;
-  transform: translateX(-50%);
+.hero-meta {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 30px;
+}
+
+.hero-meta .line {
+  width: 60px;
+  height: 1px;
+  background: var(--muted);
+  opacity: 0.3;
+}
+
+.hero-meta .kicker {
+  font-size: 0.8rem;
+  letter-spacing: 0.6em;
+  text-transform: uppercase;
+  color: var(--muted);
+  font-weight: 700;
+  margin-bottom: 0;
+}
+
+.hero-bottom {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  width: 100%;
+}
+
+.vertical-text {
+  writing-mode: vertical-rl;
+  text-transform: uppercase;
+  letter-spacing: 0.4em;
+  font-size: 0.6rem;
+  font-weight: 700;
+  color: var(--muted);
+  opacity: 0.5;
+  height: 200px;
+}
+
+.scroll-hint {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 15px;
+}
+
+.scroll-text {
   font-size: 0.55rem;
   letter-spacing: 0.4em;
   text-transform: uppercase;
   opacity: 0.4;
   font-weight: 700;
+}
+
+.scroll-bar {
+  width: 1px;
+  height: 60px;
+  background: var(--txt);
+  opacity: 0.2;
+  transform-origin: top;
+  animation: scroll-line 2s cubic-bezier(0.16, 1, 0.3, 1) infinite;
+}
+
+@keyframes scroll-line {
+  0% { transform: scaleY(0); opacity: 0; }
+  50% { transform: scaleY(1); opacity: 0.5; }
+  100% { transform: scaleY(0); transform-origin: bottom; opacity: 0; }
 }
 
 /* Philosophy Spread - Pure Minimalism */
@@ -168,25 +228,36 @@ a {
 
 .philosophy h2 {
   font-family: "Cormorant Garamond", serif;
-  font-size: clamp(2.8rem, 7vw, 6rem);
+  font-size: clamp(2.4rem, 6vw, 5rem);
   font-weight: 300;
-  margin-bottom: 60px;
-  line-height: 1.15;
-  letter-spacing: -0.02em;
+  margin-bottom: 80px;
+  line-height: 1.3;
+  letter-spacing: -0.01em;
   color: var(--accent);
+  word-break: keep-all;
 }
 
 .philosophy .lead {
-  font-size: 1.25rem;
-  max-width: 860px;
-  margin: 0 auto;
+  font-size: 1.15rem;
+  max-width: 720px;
+  margin: 0 auto 120px;
   color: var(--muted);
   font-weight: 300;
-  line-height: 2;
+  line-height: 2.2;
+  letter-spacing: 0.02em;
+  word-break: keep-all;
+}
+
+.visual-container {
+  margin-top: 40px;
+  position: relative;
+  max-width: 1100px;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .philosophy .quote {
-  margin-top: 100px;
+  margin-top: 140px;
   font-family: "Cormorant Garamond", serif;
   font-size: 3.5rem;
   font-style: italic;
@@ -214,32 +285,42 @@ a {
 
 .collection-grid {
   display: grid;
-  grid-template-columns: repeat(12, 1fr);
-  gap: 60px;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 120px 80px;
+  align-items: start;
 }
 
 .item {
-  grid-column: span 4;
+  grid-column: span 1;
   position: relative;
-  margin-bottom: 80px;
+  margin-bottom: 0;
 }
 
 .item:nth-child(even) {
-  margin-top: 140px;
+  margin-top: 180px;
 }
 
 .item:nth-child(3) {
-  grid-column: span 5;
-  grid-column-start: 8;
+  grid-column: span 1;
+  grid-column-start: auto;
+  margin-top: -100px;
 }
 
 .item__img {
   width: 100%;
-  aspect-ratio: 1/1.25; /* Unified ratio for consistency */
+  aspect-ratio: 4/5;
   background: #f0f0f0;
   overflow: hidden;
   margin-bottom: 32px;
   box-shadow: var(--shadow);
+}
+
+.item:nth-child(2) .item__img {
+  aspect-ratio: 1/1;
+}
+
+.item:nth-child(3) .item__img {
+  aspect-ratio: 3/4;
 }
 
 .item__img img {
@@ -282,20 +363,67 @@ a {
 .detail__visual {
   background: #0a0a0a;
   height: 100vh;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 18vw;
-  font-family: "Cormorant Garamond", serif;
-  opacity: 0.1;
-  pointer-events: none;
+  position: relative;
+  overflow: hidden;
 }
 
-.detail__content {
-  padding: 140px 100px;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
+.visual-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(to right, rgba(0,0,0,0.8), rgba(0,0,0,0.2));
+  z-index: 1;
+}
+
+/* Quote Animation */
+.quote-container {
+  margin-top: 140px;
+  perspective: 1000px;
+}
+
+.quote-animated {
+  font-family: "Cormorant Garamond", serif;
+  font-size: clamp(2rem, 5vw, 4.5rem);
+  font-style: italic;
+  color: var(--accent);
+  opacity: 0.9;
+  line-height: 1.2;
+  display: inline-block;
+  animation: float-3d 8s ease-in-out infinite;
+  text-shadow: 2px 2px 20px rgba(0, 0, 0, 0.05);
+  transform-style: preserve-3d;
+}
+
+@keyframes float-3d {
+  0%, 100% { transform: translateZ(0) rotateX(0deg) rotateY(0deg); }
+  25% { transform: translateZ(60px) rotateX(5deg) rotateY(-5deg); }
+  50% { transform: translateZ(30px) rotateX(-5deg) rotateY(5deg); }
+  75% { transform: translateZ(50px) rotateX(3deg) rotateY(-3deg); }
+}
+
+@media (max-width: 768px) {
+  .quote-animated { font-size: 2.2rem; }
+}
+
+.narrative-body {
+  margin-top: 40px;
+}
+
+.narrative-body p {
+  margin-bottom: 32px;
+  line-height: 2;
+  word-break: keep-all;
+}
+
+.hebrew-meaning {
+  font-family: "Cormorant Garamond", serif;
+  font-size: 1.5rem !important;
+  color: #fff !important;
+  font-style: italic;
+  line-height: 1.8;
+  margin-bottom: 48px !important;
 }
 
 .detail__content h2 {
@@ -366,27 +494,53 @@ a {
   transform: translateY(0);
 }
 
-@media (max-width: 1200px) {
+@media (max-width: 1024px) {
   .spread { padding: 120px 40px; }
+  .collection-grid { 
+    grid-template-columns: 1fr; 
+    gap: 80px;
+  }
+  .item { 
+    grid-column: span 1; 
+  }
+  .item:nth-child(even) { margin-top: 0; }
+  .item:nth-child(3) { margin-top: 0; }
+  .detail-spread { grid-template-columns: 1fr; }
+  .detail__visual { height: 40vh; }
   .detail__content { padding: 80px 40px; }
 }
 
-@media (max-width: 1024px) {
-  .collection-grid { grid-template-columns: repeat(6, 1fr); }
-  .item { grid-column: span 3; }
-  .item:nth-child(even) { margin-top: 0; }
-  .item:nth-child(3) { grid-column: span 6; grid-column-start: 1; }
-  .detail-spread { grid-template-columns: 1fr; }
-  .detail__visual { height: 40vh; }
-}
-
 @media (max-width: 768px) {
-  .nav { padding: 30px 20px; }
-  .logo { font-size: 2rem; }
-  .nav nav { gap: 20px; font-size: 0.55rem; }
-  .spread { padding: 100px 24px; }
-  .philosophy h2 { font-size: 2.8rem; }
-  .hero-spread h1 { font-size: 5rem; }
-  .footer .logo { font-size: 3rem; }
-  .footer-nav { flex-direction: column; gap: 30px; }
+  .nav { padding: 20px; flex-direction: row; justify-content: space-between; align-items: center; pointer-events: auto; }
+  .nav.scrolled { padding: 15px 20px; }
+  .logo { font-size: 1.2rem; margin-bottom: 0; letter-spacing: 0.1em; }
+  .nav nav { gap: 15px; font-size: 0.5rem; letter-spacing: 0.1em; }
+  
+  .spread { padding: 100px 20px 60px; min-height: auto; }
+  
+  .hero-spread__copy { padding: 100px 20px 40px; height: 100vh; }
+  .logo-hero { font-size: 3.5rem; letter-spacing: 0.15em; margin-bottom: 20px; }
+  .hero-meta { gap: 15px; }
+  .hero-meta .line { width: 20px; }
+  .hero-meta .kicker { font-size: 0.55rem; letter-spacing: 0.2em; }
+  .vertical-text { display: none; }
+  .scroll-hint { align-items: center; width: 100%; }
+  
+  .philosophy h2 { font-size: 2rem; margin-bottom: 40px; }
+  .philosophy .lead { font-size: 0.95rem; margin-bottom: 60px; padding: 0 10px; }
+  .philosophy .quote { font-size: 2rem; margin-top: 80px; }
+  
+  .collection .section-head { margin-bottom: 60px; }
+  .collection .section-head h2 { font-size: 2rem; }
+  .item h3 { font-size: 1.5rem; }
+  
+  .hebrew-text { font-size: 5rem; }
+  .detail__content { padding: 60px 20px; }
+  .detail__content h2 { font-size: 2.8rem; margin-bottom: 30px; }
+  .detail__content p { font-size: 1rem; }
+  .hebrew-meaning { font-size: 1.1rem !important; }
+  
+  .footer { padding: 80px 20px; }
+  .footer .logo { font-size: 2.5rem; margin-bottom: 40px; }
+  .footer-nav { gap: 20px; }
 }

@@ -1,0 +1,785 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>KIDEM — Its About to Happen</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&family=Noto+Sans+KR:wght@300;400&display=swap" rel="stylesheet"/>
+<style>
+:root{
+  --cream:#f4ede0;
+  --ivory:#ede3d0;
+  --warm:#e8dcc8;
+  --sand:#c8b89a;
+  --clay:#a8896a;
+  --terr:#9c4f28;
+  --ink:#18140f;
+  --ink2:#2e261c;
+  --muted:#6e6052;
+  --serif:'Cormorant Garamond',Georgia,serif;
+  --sans:'DM Sans','Noto Sans KR',system-ui,sans-serif;
+  --ease:cubic-bezier(.16,1,.3,1);
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;font-size:16px}
+body{background:var(--cream);color:var(--ink);font-family:var(--sans);overflow-x:hidden;-webkit-font-smoothing:antialiased}
+
+/* ─── NAV ─────────────────────── */
+nav{
+  position:fixed;top:0;left:0;right:0;z-index:200;
+  display:flex;align-items:center;justify-content:space-between;
+  padding:0 52px;height:64px;
+  transition:background .4s,box-shadow .4s;
+}
+nav.scrolled{background:rgba(244,237,224,.96);backdrop-filter:blur(12px);box-shadow:0 1px 0 rgba(0,0,0,.06)}
+.nav-logo{
+  font-family:var(--serif);font-size:18px;font-weight:400;
+  letter-spacing:.32em;text-transform:uppercase;color:var(--ink);text-decoration:none;
+}
+.nav-links{display:flex;gap:32px;list-style:none}
+.nav-links a{font-size:10.5px;letter-spacing:.18em;text-transform:uppercase;color:var(--muted);text-decoration:none;transition:color .2s}
+.nav-links a:hover{color:var(--ink)}
+.nav-cta{
+  font-size:10.5px;letter-spacing:.18em;text-transform:uppercase;
+  border:1px solid rgba(24,20,15,.35);padding:9px 20px;border-radius:999px;
+  color:var(--ink);text-decoration:none;
+  transition:background .25s,color .25s,border-color .25s;
+}
+.nav-cta:hover{background:var(--ink);color:var(--cream);border-color:var(--ink)}
+
+/* ─── HERO ─────────────────────── */
+.hero{height:100vh;min-height:640px;display:grid;grid-template-columns:1fr 1fr;position:relative;overflow:hidden}
+.hero-left{
+  display:flex;flex-direction:column;justify-content:center;
+  padding:120px 64px 80px;
+  background:var(--cream);
+  position:relative;z-index:2;
+}
+.hero-left::after{
+  content:'';position:absolute;top:0;right:0;bottom:0;width:1px;
+  background:linear-gradient(180deg,transparent,var(--sand) 40%,var(--sand) 60%,transparent);
+}
+.hero-eyebrow{
+  font-size:10px;letter-spacing:.3em;text-transform:uppercase;
+  color:var(--terr);margin-bottom:28px;
+  display:flex;align-items:center;gap:12px;
+  opacity:0;animation:fadeUp .7s .3s var(--ease) forwards;
+}
+.hero-eyebrow::before{content:'';width:32px;height:1px;background:var(--terr)}
+.hero-title{
+  font-family:var(--serif);
+  font-size:clamp(56px,6.5vw,100px);
+  line-height:.88;font-weight:300;
+  opacity:0;animation:fadeUp .9s .5s var(--ease) forwards;
+}
+.hero-title em{font-style:italic;color:var(--terr);display:block}
+.hero-meta{
+  margin-top:36px;
+  display:grid;grid-template-columns:1px 1fr;gap:0 20px;
+  align-items:start;
+  opacity:0;animation:fadeUp .8s .75s var(--ease) forwards;
+}
+.hero-meta-line{background:var(--sand);width:1px;height:100%;margin-top:4px}
+.hero-slogan{font-size:10px;letter-spacing:.22em;text-transform:uppercase;color:var(--clay);margin-bottom:10px}
+.hero-desc{font-size:14.5px;line-height:1.85;color:var(--muted);font-weight:300;max-width:36ch}
+.hero-actions{
+  margin-top:40px;display:flex;gap:12px;
+  opacity:0;animation:fadeUp .8s 1s var(--ease) forwards;
+}
+.btn-primary{
+  padding:12px 28px;background:var(--ink);color:var(--cream);
+  font-size:10.5px;letter-spacing:.2em;text-transform:uppercase;border-radius:999px;
+  text-decoration:none;transition:background .25s,transform .25s;
+  font-family:var(--sans);
+}
+.btn-primary:hover{background:var(--terr);transform:translateY(-2px)}
+.btn-ghost{
+  padding:12px 24px;border:1px solid rgba(24,20,15,.2);
+  font-size:10.5px;letter-spacing:.2em;text-transform:uppercase;
+  border-radius:999px;text-decoration:none;color:var(--ink);
+  transition:border-color .25s,background .25s,transform .25s;
+}
+.btn-ghost:hover{border-color:var(--ink);transform:translateY(-2px)}
+
+.hero-right{position:relative;overflow:hidden}
+/* European interior hero image */
+.hero-img{
+  position:absolute;inset:0;
+  background-image:url('https://images.unsplash.com/photo-1616486338812-3dadae4b4ace?w=1400&auto=format&fit=crop&q=85');
+  background-size:cover;background-position:center;
+}
+.hero-img::after{
+  content:'';position:absolute;inset:0;
+  background:linear-gradient(90deg,rgba(244,237,224,.12) 0%,transparent 30%),
+             linear-gradient(180deg,rgba(24,20,15,.04) 0%,rgba(24,20,15,.22) 100%);
+}
+.hero-badge{
+  position:absolute;bottom:32px;right:32px;z-index:2;
+  background:rgba(244,237,224,.88);backdrop-filter:blur(8px);
+  padding:10px 16px;border-radius:999px;
+  font-size:9px;letter-spacing:.22em;text-transform:uppercase;color:var(--muted);
+  border:1px solid rgba(255,255,255,.5);
+}
+
+/* ─── MARQUEE ───────────────────── */
+.marquee-wrap{
+  overflow:hidden;
+  background:var(--ink);
+  padding:13px 0;
+}
+.marquee-track{display:flex;white-space:nowrap;animation:marquee 32s linear infinite}
+.marquee-item{
+  font-family:var(--serif);font-style:italic;
+  font-size:13.5px;color:rgba(196,168,130,.55);padding:0 40px;
+}
+.marquee-dot{color:var(--terr);font-size:10px;align-self:center}
+
+/* ─── STORY ─────────────────────── */
+.story{display:grid;grid-template-columns:1fr 1fr;min-height:620px;overflow:hidden}
+/* European interior living room */
+.story-visual{
+  position:relative;overflow:hidden;
+  background-image:url('https://images.unsplash.com/photo-1586023492125-27b2c045efd7?w=1200&auto=format&fit=crop&q=85');
+  background-size:cover;background-position:center;
+}
+.story-visual::after{content:'';position:absolute;inset:0;background:rgba(24,20,15,.18)}
+.story-badge{
+  position:absolute;bottom:28px;left:28px;z-index:2;
+  font-size:9px;letter-spacing:.22em;text-transform:uppercase;
+  color:rgba(255,255,255,.5);
+}
+
+.story-content{
+  display:flex;flex-direction:column;justify-content:center;
+  padding:80px 68px;background:var(--cream);
+}
+.section-label{
+  font-size:9.5px;letter-spacing:.3em;text-transform:uppercase;
+  color:var(--terr);margin-bottom:22px;
+  display:flex;align-items:center;gap:12px;
+}
+.section-label::before{content:'';width:24px;height:1px;background:var(--terr)}
+.story-heading{
+  font-family:var(--serif);font-size:clamp(30px,2.8vw,46px);
+  line-height:1.08;font-weight:300;color:var(--ink);margin-bottom:24px;
+}
+.story-heading em{font-style:italic;color:var(--terr)}
+.story-body{font-size:14px;line-height:1.95;color:var(--muted);font-weight:300;max-width:42ch;margin-bottom:20px}
+.story-divider{width:36px;height:1px;background:var(--clay);margin:24px 0}
+.story-quote{
+  font-family:var(--serif);font-style:italic;
+  font-size:16.5px;line-height:1.65;color:var(--ink2);
+  padding-left:20px;border-left:2px solid var(--terr);
+}
+
+/* ─── ORIGIN ────────────────────── */
+.origin{
+  background:var(--ink2);color:var(--cream);
+  padding:112px 52px;position:relative;overflow:hidden;
+}
+.origin::before{
+  content:'';position:absolute;top:-150px;right:-150px;
+  width:480px;height:480px;border-radius:50%;
+  background:radial-gradient(circle,rgba(156,79,40,.18),transparent 70%);
+  pointer-events:none;
+}
+.origin::after{
+  content:'';position:absolute;bottom:-100px;left:-100px;
+  width:300px;height:300px;border-radius:50%;
+  background:radial-gradient(circle,rgba(196,168,130,.06),transparent 70%);
+  pointer-events:none;
+}
+.origin-inner{max-width:1060px;margin:0 auto;display:grid;grid-template-columns:1fr 1.5fr;gap:80px;align-items:center}
+.origin-left .section-label{color:rgba(196,168,130,.5)}
+.origin-left .section-label::before{background:rgba(196,168,130,.3)}
+.origin-word{
+  font-family:var(--serif);font-size:clamp(52px,7.5vw,108px);
+  font-weight:300;line-height:1;
+  color:rgba(196,168,130,.08);
+  margin-top:14px;letter-spacing:.08em;
+}
+.origin-heading{
+  font-family:var(--serif);font-size:clamp(26px,2.6vw,42px);
+  font-weight:300;line-height:1.18;color:var(--cream);margin-bottom:24px;
+}
+.origin-heading em{font-style:italic;color:var(--clay)}
+.origin-body{
+  font-size:14px;line-height:1.95;
+  color:rgba(196,168,130,.6);font-weight:300;margin-bottom:20px;
+}
+.origin-tags{display:flex;flex-wrap:wrap;gap:8px;margin-top:32px}
+.tag{
+  border:1px solid rgba(196,168,130,.18);border-radius:999px;
+  padding:7px 16px;font-size:9.5px;letter-spacing:.18em;text-transform:uppercase;
+  color:rgba(196,168,130,.65);transition:border-color .2s,color .2s;
+}
+.tag:hover{border-color:rgba(196,168,130,.4);color:var(--clay)}
+
+/* ─── GALLERY ───────────────────── */
+.gallery{
+  display:grid;
+  grid-template-columns:1.4fr 1fr 1fr;
+  grid-template-rows:280px 280px;
+  gap:3px;
+  background:var(--ink);
+}
+.g-item{position:relative;overflow:hidden;cursor:pointer}
+.g-item:first-child{grid-row:span 2}
+.g-fill{
+  position:absolute;inset:0;
+  background-size:cover;background-position:center;
+  transition:transform .7s var(--ease);
+}
+.g-item:hover .g-fill{transform:scale(1.06)}
+.g-overlay{
+  position:absolute;inset:0;
+  background:linear-gradient(0deg,rgba(24,20,15,.5) 0%,transparent 55%);
+  transition:opacity .3s;
+}
+.g-item:hover .g-overlay{opacity:.7}
+.g-label{
+  position:absolute;bottom:20px;left:20px;z-index:2;
+  font-size:9.5px;letter-spacing:.2em;text-transform:uppercase;
+  color:rgba(255,255,255,.7);
+  font-family:var(--sans);
+}
+.g-sub{
+  position:absolute;bottom:36px;left:20px;z-index:2;
+  font-family:var(--serif);font-style:italic;font-size:13px;
+  color:rgba(255,255,255,.45);
+}
+
+/* ─── MUSIC ─────────────────────── */
+.music{
+  background:var(--ivory);
+  padding:100px 52px;
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:80px;
+  align-items:center;
+  max-width:none;
+}
+.music-left{}
+.music-label{
+  font-size:9.5px;letter-spacing:.3em;text-transform:uppercase;
+  color:var(--terr);margin-bottom:20px;
+  display:flex;align-items:center;gap:12px;
+}
+.music-label::before{content:'';width:24px;height:1px;background:var(--terr)}
+.music-title{
+  font-family:var(--serif);font-size:clamp(32px,3.2vw,52px);
+  font-weight:300;color:var(--ink);margin-bottom:10px;line-height:1.05;
+}
+.music-title em{font-style:italic;color:var(--terr)}
+.music-artist{font-size:13px;color:var(--muted);letter-spacing:.06em;margin-bottom:20px}
+.music-desc{font-size:14px;line-height:1.85;color:var(--muted);font-weight:300;max-width:38ch}
+.music-right{}
+.sc-shell{
+  border-radius:16px;overflow:hidden;
+  box-shadow:0 20px 56px rgba(24,20,15,.14);
+  background:#fff;
+}
+.sc-attr{
+  padding:10px 14px;
+  font-size:9.5px;color:#aaa;
+  font-family:Interstate,Lucida Grande,sans-serif;
+  white-space:nowrap;overflow:hidden;text-overflow:ellipsis;
+  background:#fff;
+}
+.sc-attr a{color:#aaa;text-decoration:none}
+
+/* ─── CTA ───────────────────────── */
+.cta-banner{
+  background:var(--terr);
+  padding:112px 52px;
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:60px;
+  align-items:center;
+  position:relative;overflow:hidden;
+}
+.cta-banner::before{
+  content:'';position:absolute;
+  width:560px;height:560px;border-radius:50%;
+  border:1px solid rgba(255,255,255,.08);
+  top:50%;right:-100px;transform:translateY(-50%);
+}
+.cta-banner::after{
+  content:'';position:absolute;
+  width:320px;height:320px;border-radius:50%;
+  border:1px solid rgba(255,255,255,.06);
+  top:50%;right:60px;transform:translateY(-50%);
+}
+.cta-left{}
+.cta-tag{font-size:9.5px;letter-spacing:.3em;text-transform:uppercase;color:rgba(244,237,224,.5);margin-bottom:20px;display:flex;align-items:center;gap:12px}
+.cta-tag::before{content:'';width:24px;height:1px;background:rgba(244,237,224,.3)}
+.cta-heading{
+  font-family:var(--serif);font-size:clamp(36px,4.5vw,68px);
+  font-weight:300;line-height:.95;color:var(--cream);
+}
+.cta-heading em{font-style:italic;display:block}
+.cta-right{display:flex;flex-direction:column;gap:20px;position:relative;z-index:2}
+.cta-body{font-size:14px;line-height:1.85;color:rgba(244,237,224,.68);font-weight:300;max-width:36ch}
+.btn-light{
+  align-self:flex-start;
+  padding:13px 32px;background:var(--cream);color:var(--terr);
+  font-size:10.5px;letter-spacing:.2em;text-transform:uppercase;
+  border-radius:999px;text-decoration:none;font-family:var(--sans);
+  transition:background .25s,color .25s,transform .25s;
+  font-weight:500;
+}
+.btn-light:hover{background:var(--ink);color:var(--cream);transform:translateY(-2px)}
+
+/* ─── FOOTER ────────────────────── */
+footer{
+  background:var(--ink);
+  padding:44px 52px;
+  display:flex;justify-content:space-between;align-items:center;
+  gap:20px;flex-wrap:wrap;
+}
+.footer-logo{font-family:var(--serif);font-size:17px;letter-spacing:.3em;color:var(--clay);text-transform:uppercase}
+.footer-slogan{font-family:var(--serif);font-style:italic;font-size:13px;color:rgba(196,168,130,.3)}
+.footer-copy{font-size:10.5px;letter-spacing:.08em;color:rgba(196,168,130,.35)}
+
+/* ─── ANIMATIONS ────────────────── */
+@keyframes fadeUp{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:none}}
+@keyframes marquee{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+.reveal{opacity:0;transform:translateY(20px);transition:opacity .85s var(--ease),transform .85s var(--ease)}
+.reveal.visible{opacity:1;transform:none}
+.reveal-delay-1{transition-delay:.1s}
+.reveal-delay-2{transition-delay:.2s}
+.reveal-delay-3{transition-delay:.3s}
+
+/* ─── RESPONSIVE ────────────────── */
+@media(max-width:1024px){
+  nav{padding:0 28px}
+  .nav-links{display:none}
+  .hero,.story,.origin-inner,.cta-banner{grid-template-columns:1fr}
+  .hero-left{padding:100px 28px 56px}
+  .hero-left::after{display:none}
+  .hero-right{height:56vw;min-height:260px}
+  .story-visual{height:300px}
+  .story-content{padding:56px 28px}
+  .origin{padding:80px 28px}
+  .gallery{grid-template-columns:1fr 1fr;grid-template-rows:auto}
+  .g-item:first-child{grid-row:span 1;grid-column:span 2}
+  .g-item{height:220px}
+  .music{grid-template-columns:1fr;padding:72px 28px;gap:40px}
+  .cta-banner{padding:80px 28px;gap:36px}
+  footer{padding:36px 28px;flex-direction:column;align-items:flex-start;gap:10px}
+}
+
+/* ─── ENHANCED MOBILE RESPONSIVE ────────────────── */
+.mobile-toggle{
+  display:none;
+  width:42px;
+  height:42px;
+  border:none;
+  background:rgba(24,20,15,.06);
+  border-radius:999px;
+  align-items:center;
+  justify-content:center;
+  cursor:pointer;
+}
+.mobile-toggle span,
+.mobile-toggle span::before,
+.mobile-toggle span::after{
+  content:'';
+  display:block;
+  width:18px;
+  height:2px;
+  background:var(--ink);
+  position:relative;
+  transition:.3s;
+}
+.mobile-toggle span::before{position:absolute;top:-6px}
+.mobile-toggle span::after{position:absolute;top:6px}
+
+@media(max-width:768px){
+  html{font-size:15px}
+  
+  nav{
+    padding:0 18px;
+    height:60px;
+  }
+
+  .mobile-toggle{
+    display:flex;
+  }
+
+  .nav-links{
+    position:absolute;
+    top:60px;
+    left:16px;
+    right:16px;
+    display:flex;
+    flex-direction:column;
+    gap:18px;
+    padding:24px;
+    background:rgba(244,237,224,.98);
+    border-radius:20px;
+    box-shadow:0 16px 40px rgba(0,0,0,.08);
+    opacity:0;
+    visibility:hidden;
+    transform:translateY(-10px);
+    transition:.3s;
+  }
+
+  nav.menu-open .nav-links{
+    opacity:1;
+    visibility:visible;
+    transform:translateY(0);
+  }
+
+  .nav-cta{
+    display:none;
+  }
+
+  .hero{
+    min-height:auto;
+  }
+
+  .hero-left{
+    padding:92px 20px 48px;
+  }
+
+  .hero-title{
+    font-size:clamp(44px,15vw,72px);
+    line-height:.92;
+  }
+
+  .hero-meta{
+    grid-template-columns:1fr;
+    gap:14px;
+  }
+
+  .hero-meta-line{
+    width:40px;
+    height:1px;
+  }
+
+  .hero-desc,
+  .story-body,
+  .origin-body,
+  .music-desc,
+  .cta-body{
+    max-width:100%;
+    font-size:14px;
+    line-height:1.8;
+  }
+
+  .hero-actions{
+    flex-direction:column;
+    align-items:stretch;
+  }
+
+  .btn-primary,
+  .btn-ghost,
+  .btn-light{
+    width:100%;
+    text-align:center;
+    justify-content:center;
+  }
+
+  .hero-right{
+    height:78vw;
+    min-height:300px;
+  }
+
+  .hero-badge{
+    right:16px;
+    bottom:16px;
+    font-size:8px;
+    padding:8px 12px;
+  }
+
+  .story-content,
+  .origin,
+  .music,
+  .cta-banner,
+  footer{
+    padding-left:20px !important;
+    padding-right:20px !important;
+  }
+
+  .story-heading,
+  .origin-heading,
+  .music-title,
+  .cta-heading{
+    line-height:1.12;
+  }
+
+  .origin-inner{
+    gap:36px;
+  }
+
+  .origin-word{
+    font-size:60px;
+  }
+
+  .gallery{
+    grid-template-columns:1fr;
+  }
+
+  .g-item:first-child{
+    grid-column:span 1;
+  }
+
+  .g-item{
+    height:240px;
+  }
+
+  .music{
+    gap:28px;
+  }
+
+  iframe{
+    min-height:180px;
+  }
+
+  .cta-banner{
+    gap:28px;
+  }
+
+  .footer-logo,
+  .footer-slogan,
+  .footer-copy{
+    width:100%;
+  }
+}
+
+@media(max-width:480px){
+  .hero-left{
+    padding-top:84px;
+  }
+
+  .hero-eyebrow,
+  .section-label,
+  .music-label,
+  .cta-tag{
+    letter-spacing:.22em;
+    gap:8px;
+  }
+
+  .hero-title{
+    font-size:40px;
+  }
+
+  .story-heading,
+  .origin-heading,
+  .music-title{
+    font-size:32px;
+  }
+
+  .cta-heading{
+    font-size:40px;
+  }
+
+  .marquee-item{
+    font-size:12px;
+    padding:0 26px;
+  }
+
+  .tag{
+    font-size:8px;
+    padding:7px 12px;
+  }
+}
+
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav id="nav">
+  <a class="nav-logo" href="#">Kidem</a>
+  <button class="mobile-toggle" id="mobileToggle" aria-label="메뉴 열기"><span></span></button>
+  <ul class="nav-links">
+    <li><a href="#story">브랜드</a></li>
+    <li><a href="#origin">이름</a></li>
+    <li><a href="#music">무드</a></li>
+  </ul>
+  <a class="nav-cta" href="#cta">컬렉션 보기</a>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-left">
+    <div class="hero-eyebrow">Est. Spain — Editorial Lifestyle</div>
+    <h1 class="hero-title">
+      Its about<br/><em>to happen.</em>
+    </h1>
+    <div class="hero-meta">
+      <div class="hero-meta-line"></div>
+      <div>
+        <div class="hero-slogan">KIDEM · 고대 히브리어로 '일어나다'</div>
+        <p class="hero-desc">스페인과 유럽의 감성을 담은 라이프스타일 소품 브랜드. 당신의 공간에 좋은 일이 생겨날 것입니다.</p>
+      </div>
+    </div>
+    <div class="hero-actions">
+      <a class="btn-primary" href="#cta">컬렉션 탐색</a>
+      <a class="btn-ghost" href="#story">브랜드 스토리</a>
+    </div>
+  </div>
+  <div class="hero-right">
+    <div class="hero-img"></div>
+    <div class="hero-badge">European Interior · Editorial Living</div>
+  </div>
+</section>
+
+<!-- MARQUEE -->
+<div class="marquee-wrap">
+  <div class="marquee-track">
+    <span class="marquee-item">Spatial Design</span><span class="marquee-dot">·</span>
+    <span class="marquee-item">Editorial Objects</span><span class="marquee-dot">·</span>
+    <span class="marquee-item">스페인 감성</span><span class="marquee-dot">·</span>
+    <span class="marquee-item">European Lifestyle</span><span class="marquee-dot">·</span>
+    <span class="marquee-item">Its About to Happen</span><span class="marquee-dot">·</span>
+    <span class="marquee-item">Curated Living</span><span class="marquee-dot">·</span>
+    <span class="marquee-item">공간을 바꾸는 소품</span><span class="marquee-dot">·</span>
+    <span class="marquee-item">Spatial Design</span><span class="marquee-dot">·</span>
+    <span class="marquee-item">Editorial Objects</span><span class="marquee-dot">·</span>
+    <span class="marquee-item">스페인 감성</span><span class="marquee-dot">·</span>
+    <span class="marquee-item">European Lifestyle</span><span class="marquee-dot">·</span>
+    <span class="marquee-item">Its About to Happen</span><span class="marquee-dot">·</span>
+    <span class="marquee-item">Curated Living</span><span class="marquee-dot">·</span>
+    <span class="marquee-item">공간을 바꾸는 소품</span><span class="marquee-dot">·</span>
+  </div>
+</div>
+
+<!-- STORY -->
+<section class="story" id="story">
+  <div class="story-visual">
+    <div class="story-badge">Interior · European Style</div>
+  </div>
+  <div class="story-content">
+    <div class="section-label reveal">Brand Story</div>
+    <h2 class="story-heading reveal reveal-delay-1">공간이 먼저<br/><em>말을 겁니다.</em></h2>
+    <p class="story-body reveal reveal-delay-2">KIDEM은 인테리어 디자이너와 브랜드 마케터, 두 사람이 스페인 여행에서 만난 작은 골목의 기억으로부터 시작되었습니다. 제품보다 먼저 공간의 분위기와 리듬을 큐레이션하는 브랜드입니다.</p>
+    <p class="story-body reveal reveal-delay-2">유럽의 소시장과 아틀리에를 직접 발굴한 소품들이 당신의 선반 위에, 창가에 놓일 때 — 그 순간부터 좋은 일이 시작됩니다.</p>
+    <div class="story-divider reveal"></div>
+    <blockquote class="story-quote reveal reveal-delay-3">"당신의 공간에 좋은 일이<br/>생겨날 것입니다."</blockquote>
+  </div>
+</section>
+
+<!-- ORIGIN -->
+<section class="origin" id="origin">
+  <div class="origin-inner">
+    <div class="reveal">
+      <div class="section-label" style="color:rgba(196,168,130,.45)">
+        <span style="display:inline-block;width:24px;height:1px;background:rgba(196,168,130,.25)"></span>
+        이름의 기원
+      </div>
+      <div class="origin-word">קדם</div>
+    </div>
+    <div>
+      <h2 class="origin-heading reveal reveal-delay-1">이름 안에<br/><em>이미 약속이 있습니다.</em></h2>
+      <p class="origin-body reveal reveal-delay-2">'KIDEM'은 고대 히브리어 קדם(케뎀)에서 왔습니다. '앞에 있는 것', '일어날 것', '시작되는 것'을 뜻하는 단어입니다. 슬로건 <strong style="color:var(--clay)">"Its about to happen"</strong>은 이 이름의 직역이자, 고객에게 건네는 조용한 약속입니다.</p>
+      <div class="origin-tags reveal reveal-delay-3">
+        <span class="tag">Ancient Hebrew</span>
+        <span class="tag">קדם · 케뎀</span>
+        <span class="tag">Its About to Happen</span>
+        <span class="tag">공간의 약속</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- GALLERY — European interior images -->
+<div class="gallery" id="gallery">
+  <div class="g-item">
+    <!-- European minimal living room -->
+    <div class="g-fill" style="background-image:url('https://images.unsplash.com/photo-1555041469-a586c61ea9bc?w=1000&auto=format&fit=crop&q=85')"></div>
+    <div class="g-overlay"></div>
+    <div class="g-sub">Living</div>
+    <div class="g-label">Living Room</div>
+  </div>
+  <div class="g-item">
+    <!-- European kitchen / dining -->
+    <div class="g-fill" style="background-image:url('https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?w=800&auto=format&fit=crop&q=85')"></div>
+    <div class="g-overlay"></div>
+    <div class="g-sub">Kitchen</div>
+    <div class="g-label">Dining</div>
+  </div>
+  <div class="g-item">
+    <!-- European bedroom / warm tones -->
+    <div class="g-fill" style="background-image:url('https://images.unsplash.com/photo-1540518614846-7eded433c457?w=800&auto=format&fit=crop&q=85')"></div>
+    <div class="g-overlay"></div>
+    <div class="g-sub">Bedroom</div>
+    <div class="g-label">Bedroom</div>
+  </div>
+  <div class="g-item">
+    <!-- Decorative objects / still life -->
+    <div class="g-fill" style="background-image:url('https://images.unsplash.com/photo-1600210492493-0946911123ea?w=800&auto=format&fit=crop&q=85')"></div>
+    <div class="g-overlay"></div>
+    <div class="g-sub">Objects</div>
+    <div class="g-label">Details</div>
+  </div>
+</div>
+
+<!-- MUSIC -->
+<section class="music" id="music">
+  <div class="music-left">
+    <div class="music-label reveal">Editorial Mood</div>
+    <h2 class="music-title reveal reveal-delay-1"><em>Flame in<br/>Your Eyes</em></h2>
+    <div class="music-artist reveal reveal-delay-2">Christian Padovan</div>
+    <p class="music-desc reveal reveal-delay-2">KIDEM의 공간을 채우는 첫 번째 사운드. 스페인의 빛과 유럽의 온기가 담긴 오프닝 무드입니다.</p>
+  </div>
+  <div class="music-right reveal reveal-delay-2">
+    <div class="sc-shell">
+      <iframe width="100%" height="166" scrolling="no" frameborder="no" allow="autoplay; encrypted-media"
+        src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/soundcloud%253Atracks%253A901449943&color=%239c4f28&auto_play=false&hide_related=false&show_comments=false&show_user=true&show_reposts=false&show_teaser=true">
+      </iframe>
+      <div class="sc-attr">
+        <a href="https://soundcloud.com/christian-padovan" target="_blank">Christian Padovan</a>
+        · <a href="https://soundcloud.com/christian-padovan/flame-in-your-eyes" target="_blank">Flame In Your Eyes</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-banner" id="cta">
+  <div class="cta-left">
+    <div class="cta-tag">Its About to Happen</div>
+    <h2 class="cta-heading reveal">좋은 일이<br/><em>생겨날 것입니다.</em></h2>
+  </div>
+  <div class="cta-right">
+    <p class="cta-body reveal reveal-delay-1">당신의 공간에 KIDEM을 들이는 순간, 무언가가 시작됩니다. 첫 번째 컬렉션을 만나보세요.</p>
+    <a class="btn-light reveal reveal-delay-2" href="#">컬렉션 보기</a>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-logo">Kidem</div>
+  <div class="footer-slogan">"Its about to happen."</div>
+  <div class="footer-copy">© 2025 KIDEM. All rights reserved.</div>
+</footer>
+
+<script>
+// Nav scroll effect
+const nav = document.getElementById('nav');
+window.addEventListener('scroll', () => {
+  nav.classList.toggle('scrolled', window.scrollY > 40);
+}, {passive: true});
+
+
+// Mobile menu
+const mobileToggle = document.getElementById('mobileToggle');
+mobileToggle?.addEventListener('click', () => {
+  nav.classList.toggle('menu-open');
+});
+
+// Scroll reveal
+const io = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if(e.isIntersecting){ e.target.classList.add('visible'); io.unobserve(e.target); }
+  });
+}, {threshold: 0.1});
+document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+</script>
+</body>
+</html>
