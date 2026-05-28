@@ -1,102 +1,138 @@
-import React, { Suspense, useMemo, useRef, useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { createRoot } from 'react-dom/client'
-import { Canvas, useFrame } from '@react-three/fiber'
-import { Environment, Float, useCursor } from '@react-three/drei'
-import * as THREE from 'three'
 import './styles.css'
 
-function Orb({ color, scale, position }) {
-  const ref = useRef()
-  const [hovered, setHovered] = useState(false)
-  const [dragging, setDragging] = useState(false)
-  const start = useRef({ x: 0, y: 0, rx: 0, ry: 0 })
-  useCursor(hovered || dragging)
-
-  const material = useMemo(() => new THREE.MeshStandardMaterial({
-    color: new THREE.Color(color),
-    roughness: 0.42,
-    metalness: 0.08,
-  }), [color])
-
-  useFrame((state, delta) => {
-    if (!ref.current) return
-    if (!dragging) {
-      ref.current.rotation.x += delta * 0.18
-      ref.current.rotation.y += delta * 0.26
-      ref.current.position.y = position[1] + Math.sin(state.clock.elapsedTime * 0.8) * 0.08
-    }
-  })
-
-  return (
-    <Float speed={1.2} rotationIntensity={0.4} floatIntensity={0.7}>
-      <mesh
-        ref={ref}
-        position={position}
-        scale={scale}
-        material={material}
-        onPointerOver={() => setHovered(true)}
-        onPointerOut={() => setHovered(false)}
-        onPointerDown={(e) => {
-          setDragging(true)
-          start.current = { x: e.clientX, y: e.clientY, rx: ref.current.rotation.x, ry: ref.current.rotation.y }
-          e.target.setPointerCapture?.(e.pointerId)
-        }}
-        onPointerMove={(e) => {
-          if (!dragging || !ref.current) return
-          const dx = (e.clientX - start.current.x) * 0.01
-          const dy = (e.clientY - start.current.y) * 0.01
-          ref.current.rotation.y = start.current.ry + dx
-          ref.current.rotation.x = start.current.rx + dy
-        }}
-        onPointerUp={() => setDragging(false)}
-        onPointerCancel={() => setDragging(false)}
-      >
-        <dodecahedronGeometry args={[1, 1]} />
-      </mesh>
-    </Float>
-  )
-}
-
-function Scene() {
-  return (
-    <Canvas camera={{ position: [0, 0, 6.8], fov: 35 }} dpr={[1, 1.75]} gl={{ antialias: true, alpha: true }}>
-      <color attach="background" args={["#f1ebfb"]} />
-      <ambientLight intensity={0.9} />
-      <directionalLight position={[5, 6, 7]} intensity={2.2} color="#f8f4ff" />
-      <directionalLight position={[-4, -2, -2]} intensity={0.45} color="#9c7ed9" />
-      <Suspense fallback={null}>
-        <group>
-          <Orb color="#d9b8ff" scale={1.65} position={[-1.8, 0.8, 0.4]} />
-          <Orb color="#f1d7ff" scale={1.1} position={[1.55, -0.55, 0.1]} />
-          <Orb color="#c9a4ff" scale={0.92} position={[0.1, -1.35, -0.1]} />
-        </group>
-        <Environment preset="warehouse" />
-      </Suspense>
-    </Canvas>
-  )
-}
-
 function App() {
+  const [scrolled, setScrolled] = useState(false)
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setScrolled(window.scrollY > 100)
+    }
+    window.addEventListener('scroll', handleScroll)
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible')
+        }
+      })
+    }, { threshold: 0.1 })
+
+    document.querySelectorAll('.reveal').forEach((el) => observer.observe(el))
+    return () => {
+      window.removeEventListener('scroll', handleScroll)
+      observer.disconnect()
+    }
+  }, [])
+
   return (
     <main className="page">
-      <header className="nav glass">
-        <div className="logo">KIDEM</div>
-        <nav><a href="#story">story</a><a href="#collection">collection</a><a href="#cta" className="nav__cta">buy now</a></nav>
+      <header className={`nav ${scrolled ? 'scrolled' : ''}`}>
+        <div className="logo" onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}>KIDEM</div>
+        <nav>
+          <a href="#philosophy">Philosophy</a>
+          <a href="#collection">Collection</a>
+          <a href="#editorial">Journal</a>
+          <a href="#contact">Contact</a>
+        </nav>
       </header>
-      <section className="hero">
-        <div className="hero__copy">
-          <p className="kicker">it's about to happen</p>
-          <h1>좋은 일이<br/>곧 시작됩니다</h1>
-          <p className="sub">유럽 빈티지의 깊이와 조용한 고급감, 그리고 손으로 만지는 듯한 3D 물성으로 Kidem의 세계를 만듭니다.</p>
-          <div className="actions"><a href="#collection" className="btn solid">collection</a><a href="#story" className="btn ghost">brand story</a></div>
-          <ul className="meta"><li><strong>3d</strong><span>engine hero</span></li><li><strong>glass</strong><span>soft ui</span></li><li><strong>drag</strong><span>rotate</span></li></ul>
+
+      {/* Hero Spread */}
+      <section className="spread hero-spread" id="top">
+        <div className="spline-container">
+          <spline-viewer url="https://prod.spline.design/Pe2ow20vSg2vj7iU/scene.splinecode" />
         </div>
-        <div className="hero__scene"><Scene /></div>
+        <div className="hero-spread__copy">
+          <p className="kicker reveal">Est. Spain — Editorial Lifestyle</p>
+          <p className="scroll-hint">Discover More</p>
+        </div>
       </section>
-      <section className="ticker"><div className="ticker__track">vintage mood · quiet luxury · european design · tactile surfaces · curated living · vintage mood · quiet luxury · european design · tactile surfaces · curated living</div></section>
-      <section className="section" id="story"><div className="section__head"><p className="kicker">brand story</p><h2>Kidem은 어떤 일이 일어나다는 뜻입니다</h2><p className="lead">좋은 일이 일어나는 순간을 공간과 오브제로 번역합니다. 설명보다 먼저 분위기가 느껴지도록, 색과 질감과 텍스트의 온도를 하나로 맞췄습니다.</p></div></section>
-      <section className="section" id="collection"><div className="section__head"><p className="kicker">collection</p><h2>빈티지하지만 멋스러운 선택</h2></div><div className="cards"><article className="card"><img src="/inflatable-16.jpg" alt="object" style={{ width: '100%', height: '160px', objectFit: 'cover', borderRadius: '16px', marginBottom: '16px' }} /><h3>object</h3><p>공간의 중심이 되는 조형 오브제.</p></article><article className="card"><h3>table</h3><p>테이블 위 리듬을 바꾸는 소품.</p></article><article className="card"><h3>living</h3><p>일상을 조용히 바꾸는 리빙 오브제.</p></article></div></section>
-      <section className="section" id="cta"><div className="cta"><p className="kicker">buy now</p><h2>당신의 공간에 좋은 일이 일어나도록</h2><p>키뎀의 큐레이션은 당신의 다음 장면을 준비합니다.</p><a className="btn solid" href="#top">top</a></div></section>
+
+      {/* Philosophy Spread */}
+      <section className="spread philosophy" id="philosophy">
+        <div className="spread__content">
+          <p className="kicker reveal">Our Ethos</p>
+          <h2 className="reveal">The Art of<br/>Spatial Rhythm.</h2>
+          <p className="lead reveal">
+            KIDEM은 고요함 속에서 피어나는 아름다움을 믿습니다. 
+            스페인의 여유로운 정서와 유럽의 정교한 미학이 만나는 지점에서, 
+            우리는 당신의 일상을 하나의 작품으로 만드는 오브제들을 제안합니다.
+          </p>
+          <img 
+            src="/KakaoTalk_20230110_215608685.jpg" 
+            alt="Philosophy Visual" 
+            className="reveal" 
+            style={{ width: '100%', maxWidth: '1000px', marginTop: '80px', height: 'auto', boxShadow: 'var(--shadow)' }} 
+          />
+        </div>
+      </section>
+
+      {/* Collection Spread */}
+      <section className="spread collection" id="collection">
+        <div className="spread__content">
+          <div className="section-head reveal">
+            <p className="kicker">The Collection</p>
+            <h2>Objects for<br/>Quiet Living.</h2>
+          </div>
+          <div className="collection-grid">
+            <article className="item reveal">
+              <div className="item__img">
+                <img src="/KakaoTalk_20230110_224521382.jpg" alt="Collection Item 01" />
+              </div>
+              <h3>01. Sculptural Form</h3>
+              <p>Object / Inflatable Texture</p>
+            </article>
+            <article className="item reveal">
+              <div className="item__img">
+                <img src="/KakaoTalk_20230112_005735945_07.jpg" alt="Collection Item 02" />
+              </div>
+              <h3>02. Mineral Vessel</h3>
+              <p>Tableware / Natural Stone</p>
+            </article>
+            <article className="item reveal">
+              <div className="item__img">
+                <img src="/KakaoTalk_20230112_005735945_04.jpg" alt="Collection Item 03" />
+              </div>
+              <h3>03. Editorial Glass</h3>
+              <p>Living / Hand-blown</p>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      {/* Editorial Spread */}
+      <section className="spread detail-spread" id="editorial">
+        <div className="detail__visual">
+          <img 
+            src="/KakaoTalk_20221223_190657427.jpg" 
+            alt="Editorial Visual" 
+            style={{ width: '100%', height: '100%', objectFit: 'cover', opacity: '0.4' }} 
+          />
+        </div>
+        <div className="detail__content">
+          <p className="kicker reveal">Heritage</p>
+          <h2 className="reveal">Beyond the<br/>Ordinary.</h2>
+          <p className="reveal">
+            '케뎀'은 단순히 과거가 아닌, 이미 우리 앞에 와 있는 미래를 뜻합니다. 
+            KIDEM이 선별한 소품들은 당신의 공간에 새로운 에너지를 불어넣고, 
+            가장 개인적인 장소에서 가장 풍요로운 감각을 깨울 것입니다. 
+            진정한 럭셔리는 화려함이 아닌, 사물과 공간이 이루는 완벽한 조화에 있습니다.
+          </p>
+        </div>
+      </section>
+
+      {/* Footer */}
+      <footer className="footer" id="contact">
+        <div className="logo reveal">KIDEM</div>
+        <div className="footer-nav reveal">
+          <a href="#">Instagram</a>
+          <a href="#">Pinterest</a>
+          <a href="#">Stockists</a>
+          <a href="#">Shop Now</a>
+        </div>
+        <p className="copyright reveal">© 2025 KIDEM. All rights reserved.</p>
+      </footer>
     </main>
   )
 }
