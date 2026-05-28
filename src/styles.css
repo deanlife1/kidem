@@ -358,6 +358,7 @@ a {
   padding: 0;
   background: #111;
   color: #fbfaf8;
+  align-items: center;
 }
 
 .detail__visual {
@@ -375,6 +376,10 @@ a {
   height: 100%;
   background: linear-gradient(to right, rgba(0,0,0,0.8), rgba(0,0,0,0.2));
   z-index: 1;
+}
+
+.detail__content {
+  padding: 0 120px;
 }
 
 /* Quote Animation */
