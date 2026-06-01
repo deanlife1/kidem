@@ -1,9 +1,11 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState, useRef } from 'react'
 import { createRoot } from 'react-dom/client'
 import './styles.css'
 
 function App() {
   const [scrolled, setScrolled] = useState(false)
+  const [isPlaying, setIsPlaying] = useState(false)
+  const audioRef = useRef(null)
 
   useEffect(() => {
     const handleScroll = () => {
@@ -20,14 +22,56 @@ function App() {
     }, { threshold: 0.1 })
 
     document.querySelectorAll('.reveal').forEach((el) => observer.observe(el))
+
+    // Handle initial audio play attempt
+    const playAudio = () => {
+      if (audioRef.current) {
+        audioRef.current.play()
+          .then(() => {
+            setIsPlaying(true)
+            window.removeEventListener('click', playAudio)
+          })
+          .catch(err => console.log("Autoplay blocked, waiting for interaction"))
+      }
+    }
+
+    window.addEventListener('click', playAudio)
+
     return () => {
       window.removeEventListener('scroll', handleScroll)
+      window.removeEventListener('click', playAudio)
       observer.disconnect()
     }
   }, [])
 
+  const toggleMusic = () => {
+    if (audioRef.current) {
+      if (isPlaying) {
+        audioRef.current.pause()
+      } else {
+        audioRef.current.play()
+      }
+      setIsPlaying(!isPlaying)
+    }
+  }
+
   return (
     <main className="page">
+      <audio ref={audioRef} src="/flame-in-your-eyes.mp3" loop />
+      
+      <button 
+        className={`music-toggle ${isPlaying ? 'playing' : ''}`} 
+        onClick={toggleMusic}
+        aria-label="Toggle Music"
+      >
+        <div className="music-icon">
+          <span className="bar"></span>
+          <span className="bar"></span>
+          <span className="bar"></span>
+        </div>
+        <span className="music-text">{isPlaying ? 'SOUND ON' : 'SOUND OFF'}</span>
+      </button>
+
       <header className={`nav ${scrolled ? 'scrolled' : ''}`}>
         <div className="logo" onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}>KIDEM</div>
         <nav>
